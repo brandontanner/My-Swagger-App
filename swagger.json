@@ -1,0 +1,114 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0", 
+        "title": "My Mountain Project",
+        "description": "My Mountain Project Application API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "my-swagger-app.herokuapp.com",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Mountains",
+            "description": "API for mountains in the system"
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+
+    "paths": {
+        "/mountains": {
+            "get": {
+                "tags": ["Mountains"],
+                "summary": "Get all Mountains in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Mountain"
+                        }
+                    }
+                }
+            }
+        },
+        "/mountain": {
+            "post": {
+                "tags": ["Mountains"],
+                "description": "Create new mountain in system",
+                "parameters": [
+                    {
+                        "name": "mountain",
+                        "in": "body",
+                        "description": "Mountain that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Mountain"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New mountain is created",
+                        "schema": {
+                            "$ref": "#/definitions/Mountain"
+                        }
+                    }
+                }
+            }
+        },
+        "/mountain/{id}": {
+            "delete": {
+                "tags": ["Mountains"],
+                "description": "Delete Mountain",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the mountain that we want to delete",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Mountain"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Mountain": {
+            "required": ["id","name"],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
+
+
+
+
